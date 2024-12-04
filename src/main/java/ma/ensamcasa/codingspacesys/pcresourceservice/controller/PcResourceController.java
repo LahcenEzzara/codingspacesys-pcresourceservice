@@ -17,13 +17,21 @@ public class PcResourceController {
         this.service = service;
     }
 
+    @PostMapping
+    public ResponseEntity<String> addResource(@RequestBody PcResource resource) {
+        String response = service.addResource(resource);
+        return ResponseEntity.status(201).body(response);
+    }
+
     @GetMapping
-    public List<PcResource> getAllResources() {
-        return service.getAllResources();
+    public ResponseEntity<List<PcResource>> getAllResources() {
+        List<PcResource> resources = service.getAllResources();
+        return ResponseEntity.ok(resources);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PcResource> updateResource(@PathVariable String id, @RequestBody PcResource resource) {
-        return ResponseEntity.ok(service.updateResource(id, resource));
+    public ResponseEntity<String> updateResource(@PathVariable Long id, @RequestBody PcResource resource) {
+        String response = service.updateResource(id, resource);
+        return ResponseEntity.ok(response);
     }
 }

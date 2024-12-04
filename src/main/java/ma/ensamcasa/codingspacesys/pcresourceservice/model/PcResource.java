@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PcResource {
 
     @Id
-    private String id;
+    private Long id;
 
     private String status;
     private String lastUpdated;

@@ -15,15 +15,21 @@ public class PcResourceService {
         this.repository = repository;
     }
 
+    public String addResource(PcResource resource) {
+        repository.save(resource);
+        return "Resource added successfully";
+    }
+
     public List<PcResource> getAllResources() {
         return repository.findAll();
     }
 
-    public PcResource updateResource(String id, PcResource updatedResource) {
+    public String updateResource(Long id, PcResource updatedResource) {
         return repository.findById(id).map(resource -> {
             resource.setStatus(updatedResource.getStatus());
             resource.setLastUpdated(updatedResource.getLastUpdated());
-            return repository.save(resource);
-        }).orElseThrow(() -> new RuntimeException("Resource not found"));
+            repository.save(resource);
+            return "Resource updated successfully";
+        }).orElse("Resource not found");
     }
 }
